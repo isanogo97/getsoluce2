@@ -33,7 +33,7 @@ class TestAccountsSeeder extends Seeder
         $enterprise = Enterprise::firstOrCreate(
             ['site_number' => 'SITE-00001'],
             [
-                'name' => 'Entreprise Test GetSoluce',
+                'name' => 'Enterprise Test GetSoluce',
                 'address' => '123 Avenue des Tests, 75001 Paris',
                 'contact_first_name' => 'Jean',
                 'contact_last_name' => 'Dupont',
@@ -44,7 +44,7 @@ class TestAccountsSeeder extends Seeder
             ]
         );
         
-        $this->command->info('✅ Entreprise de test créée : ' . $enterprise->name);
+        $this->command->info('✅ Enterprise de test créée : ' . $enterprise->name);
         
         // 3. Créer ou mettre à jour le compte ADMIN
         $admin = User::updateOrCreate(
@@ -119,6 +119,6 @@ class TestAccountsSeeder extends Seeder
             ]
         );
         $this->command->info('');
-        $this->command->info('Entreprise de test : ' . $enterprise->name . ' (' . $enterprise->site_number . ')');
+        $this->command->info('Enterprise de test : ' . $enterprise->name . ' (' . $enterprise->site_number . ')');
     }
 }

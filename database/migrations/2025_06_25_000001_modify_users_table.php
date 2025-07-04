@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Schema;
 class ModifyUsersTable extends Migration
 {
     /**
-     * Ajoute entreprise_id et role à la table users.
+     * Ajoute enterprise_id et role à la table users.
      */
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('entreprise_id')
+            $table->foreignId('enterprise_id')
                   ->nullable()
                   ->constrained()
                   ->nullOnDelete();
@@ -22,13 +22,13 @@ class ModifyUsersTable extends Migration
     }
 
     /**
-     * Supprime entreprise_id et role de la table users.
+     * Supprime enterprise_id et role de la table users.
      */
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['entreprise_id']);
-            $table->dropColumn(['entreprise_id', 'role']);
+            $table->dropForeign(['enterprise_id']);
+            $table->dropColumn(['enterprise_id', 'role']);
         });
     }
 }
