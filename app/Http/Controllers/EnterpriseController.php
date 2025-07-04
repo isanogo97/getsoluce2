@@ -11,5 +11,10 @@ class EnterpriseController extends Controller
     {
         return response()->json(Enterprise::all());
     }
+
+    public function show(Enterprise $enterprise)
+    {
+        return response()->json($enterprise);
+    }
 }
 
