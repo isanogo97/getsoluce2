@@ -46,7 +46,7 @@ class SetupHRSystem extends Command
                 'address' => '123 Avenue des Tests, 75001 Paris',
                 'contact_first_name' => 'Jean',
                 'contact_last_name' => 'Dupont',
-                'contact_email' => 'contact@getsoluce.com',
+                'contact_email' => env('CONTACT_EMAIL'),
                 'contact_phone' => '0123456789',
                 'is_active' => true,
                 'billing_rate' => 50.00,
@@ -57,10 +57,10 @@ class SetupHRSystem extends Command
         // 2. Créer/Mettre à jour le compte créateur
         $this->info('👑 Configuration du compte créateur...');
         $creator = User::updateOrCreate(
-            ['email' => 'ibrahim.sanogo63@gmail.com'],
+            ['email' => env('CREATOR_EMAIL')],
             [
                 'name' => 'Ibrahim Sanogo',
-                'password' => Hash::make('94Valenton@'),
+                'password' => Hash::make(env('CREATOR_PASSWORD')),
                 'role' => 'creator',
                 'enterprise_id' => null,
                 'is_active' => true,
@@ -68,15 +68,15 @@ class SetupHRSystem extends Command
                 'date_of_birth' => '1990-03-15',
             ]
         );
-        $this->line('✅ Créateur : ibrahim.sanogo63@gmail.com / 94Valenton@');
+        $this->line('✅ Créateur : '.env('CREATOR_EMAIL').' / '.env('CREATOR_PASSWORD'));
         
         // 3. Créer/Mettre à jour le compte admin
         $this->info('🏢 Configuration du compte admin...');
         $admin = User::updateOrCreate(
-            ['email' => 'admin@getsoluce.com'],
+            ['email' => env('ADMIN_EMAIL')],
             [
                 'name' => 'Admin Test',
-                'password' => Hash::make('Admin123!'),
+                'password' => Hash::make(env('ADMIN_PASSWORD')),
                 'role' => 'admin',
                 'enterprise_id' => $enterprise->id,
                 'position' => 'Responsable RH',
@@ -89,15 +89,15 @@ class SetupHRSystem extends Command
                 'max_advance_percentage' => 30,
             ]
         );
-        $this->line('✅ Admin : admin@getsoluce.com / Admin123!');
+        $this->line('✅ Admin : '.env('ADMIN_EMAIL').' / '.env('ADMIN_PASSWORD'));
         
         // 4. Créer/Mettre à jour le compte employé
         $this->info('👤 Configuration du compte employé...');
         $employee = User::updateOrCreate(
-            ['email' => 'employee@getsoluce.com'],
+            ['email' => env('EMPLOYEE_EMAIL')],
             [
                 'name' => 'Employé Test',
-                'password' => Hash::make('Employee123!'),
+                'password' => Hash::make(env('EMPLOYEE_PASSWORD')),
                 'role' => 'employee',
                 'enterprise_id' => $enterprise->id,
                 'position' => 'Développeur',
@@ -112,7 +112,7 @@ class SetupHRSystem extends Command
                 'invitation_accepted_at' => now(),
             ]
         );
-        $this->line('✅ Employé : employee@getsoluce.com / Employee123!');
+        $this->line('✅ Employé : '.env('EMPLOYEE_EMAIL').' / '.env('EMPLOYEE_PASSWORD'));
         $this->line('   → Anniversaire aujourd\'hui ! 🎂');
         $this->line('   → Avance disponible : ' . number_format($employee->getMaxAdvanceAmount(), 2) . '€');
         
@@ -162,9 +162,9 @@ class SetupHRSystem extends Command
         $this->table(
             ['Rôle', 'Email', 'Mot de passe', 'Dashboard'],
             [
-                ['👑 Créateur', 'ibrahim.sanogo63@gmail.com', '94Valenton@', 'Vue globale toutes entreprises'],
-                ['🏢 Admin', 'admin@getsoluce.com', 'Admin123!', 'Gestion entreprise + validations'],
-                ['👤 Employé', 'employee@getsoluce.com', 'Employee123!', 'Dashboard personnel + avances'],
+                ['👑 Créateur', env('CREATOR_EMAIL'), env('CREATOR_PASSWORD'), 'Vue globale toutes entreprises'],
+                ['🏢 Admin', env('ADMIN_EMAIL'), env('ADMIN_PASSWORD'), 'Gestion entreprise + validations'],
+                ['👤 Employé', env('EMPLOYEE_EMAIL'), env('EMPLOYEE_PASSWORD'), 'Dashboard personnel + avances'],
             ]
         );
         

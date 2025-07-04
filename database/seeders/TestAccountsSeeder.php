@@ -16,18 +16,18 @@ class TestAccountsSeeder extends Seeder
     {
         // 1. Créer ou mettre à jour le compte CRÉATEUR
         $creator = User::updateOrCreate(
-            ['email' => 'ibrahim.sanogo63@gmail.com'],
+            ['email' => env('CREATOR_EMAIL')],
             [
                 'name' => 'Ibrahim Sanogo',
-                'password' => Hash::make('94Valenton@'),
+                'password' => Hash::make(env('CREATOR_PASSWORD')),
                 'role' => 'creator',
                 'enterprise_id' => null, // Le créateur n'appartient à aucune entreprise
                 'is_active' => true,
                 'email_verified_at' => now(),
             ]
         );
-        
-        $this->command->info('✅ Compte créateur créé/mis à jour : ibrahim.sanogo63@gmail.com');
+
+        $this->command->info('✅ Compte créateur créé/mis à jour : '.env('CREATOR_EMAIL'));
         
         // 2. Créer une entreprise de test
         $enterprise = Enterprise::firstOrCreate(
@@ -37,7 +37,7 @@ class TestAccountsSeeder extends Seeder
                 'address' => '123 Avenue des Tests, 75001 Paris',
                 'contact_first_name' => 'Jean',
                 'contact_last_name' => 'Dupont',
-                'contact_email' => 'contact@getsoluce.com',
+                'contact_email' => env('CONTACT_EMAIL'),
                 'contact_phone' => '0123456789',
                 'is_active' => true,
                 'billing_rate' => 50.00,
@@ -48,10 +48,10 @@ class TestAccountsSeeder extends Seeder
         
         // 3. Créer ou mettre à jour le compte ADMIN
         $admin = User::updateOrCreate(
-            ['email' => 'admin@getsoluce.com'],
+            ['email' => env('ADMIN_EMAIL')],
             [
                 'name' => 'Admin Test',
-                'password' => Hash::make('Admin123!'),
+                'password' => Hash::make(env('ADMIN_PASSWORD')),
                 'role' => 'admin',
                 'enterprise_id' => $enterprise->id,
                 'position' => 'Responsable RH',
@@ -61,14 +61,14 @@ class TestAccountsSeeder extends Seeder
             ]
         );
         
-        $this->command->info('✅ Compte admin créé/mis à jour : admin@getsoluce.com');
+        $this->command->info('✅ Compte admin créé/mis à jour : '.env('ADMIN_EMAIL'));
         
         // 4. Créer ou mettre à jour le compte EMPLOYEE
         $employee = User::updateOrCreate(
-            ['email' => 'employee@getsoluce.com'],
+            ['email' => env('EMPLOYEE_EMAIL')],
             [
                 'name' => 'Employé Test',
-                'password' => Hash::make('Employee123!'),
+                'password' => Hash::make(env('EMPLOYEE_PASSWORD')),
                 'role' => 'employee',
                 'enterprise_id' => $enterprise->id,
                 'position' => 'Développeur',
@@ -83,7 +83,7 @@ class TestAccountsSeeder extends Seeder
             ]
         );
         
-        $this->command->info('✅ Compte employé créé/mis à jour : employee@getsoluce.com');
+        $this->command->info('✅ Compte employé créé/mis à jour : '.env('EMPLOYEE_EMAIL'));
         
         // 5. Créer quelques données de test pour l'employé
         if ($employee->absences()->count() === 0) {
@@ -113,9 +113,9 @@ class TestAccountsSeeder extends Seeder
         $this->command->table(
             ['Rôle', 'Email', 'Mot de passe'],
             [
-                ['Créateur', 'ibrahim.sanogo63@gmail.com', '94Valenton@'],
-                ['Admin', 'admin@getsoluce.com', 'Admin123!'],
-                ['Employé', 'employee@getsoluce.com', 'Employee123!'],
+                ['Créateur', env('CREATOR_EMAIL'), env('CREATOR_PASSWORD')],
+                ['Admin', env('ADMIN_EMAIL'), env('ADMIN_PASSWORD')],
+                ['Employé', env('EMPLOYEE_EMAIL'), env('EMPLOYEE_PASSWORD')],
             ]
         );
         $this->command->info('');
