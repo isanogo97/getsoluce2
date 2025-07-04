@@ -1,0 +1,22 @@
+# Ignore environment files
+.env
+
+# Ignore vendor directory
+vendor/
+
+# Ignore node modules
+node_modules/
+
+# Ignore compiled files
+/public/storage
+/storage/*.key
+
+# Ignore SQLite database
+database/database.sqlite
+
+# Ignore composer lock if needed
+composer.lock
+
+# Ignore IDE/editor directories
+.idea/
+.vscode/

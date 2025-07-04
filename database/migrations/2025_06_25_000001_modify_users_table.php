@@ -7,28 +7,28 @@ use Illuminate\Support\Facades\Schema;
 class ModifyUsersTable extends Migration
 {
     /**
-     * Ajoute entreprise_id et role à la table users.
+     * Add enterprise_id and role to the users table.
      */
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('entreprise_id')
+            $table->foreignId('enterprise_id')
                   ->nullable()
                   ->constrained()
                   ->nullOnDelete();
-            $table->enum('role', ['salarié', 'admin'])
-                  ->default('salarié');
+            $table->enum('role', ['employee', 'admin', 'creator'])
+                  ->default('employee');
         });
     }
 
     /**
-     * Supprime entreprise_id et role de la table users.
+     * Drop enterprise_id and role from the users table.
      */
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['entreprise_id']);
-            $table->dropColumn(['entreprise_id', 'role']);
+            $table->dropForeign(['enterprise_id']);
+            $table->dropColumn(['enterprise_id', 'role']);
         });
     }
 }
