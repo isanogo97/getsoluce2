@@ -28,7 +28,7 @@ class SetupHRSystem extends Command
      */
     public function handle()
     {
-        $this->info('🚀 Configuration du système HR Multi-Entreprises');
+        $this->info('🚀 Configuration du système HR Multi-Enterprises');
         $this->info('==============================================');
         
         if ($this->option('fresh')) {
@@ -37,12 +37,12 @@ class SetupHRSystem extends Command
             }
         }
         
-        // 1. Créer l'entreprise de test
-        $this->info('🏢 Création de l\'entreprise de test...');
+        // 1. Créer l'enterprise de test
+        $this->info('🏢 Création de l\'enterprise de test...');
         $enterprise = Enterprise::firstOrCreate(
             ['site_number' => 'SITE-00001'],
             [
-                'name' => 'Entreprise Test GetSoluce',
+                'name' => 'Enterprise Test GetSoluce',
                 'address' => '123 Avenue des Tests, 75001 Paris',
                 'contact_first_name' => 'Jean',
                 'contact_last_name' => 'Dupont',
@@ -52,7 +52,7 @@ class SetupHRSystem extends Command
                 'billing_rate' => 50.00,
             ]
         );
-        $this->line('✅ Entreprise créée : ' . $enterprise->name);
+        $this->line('✅ Enterprise créée : ' . $enterprise->name);
         
         // 2. Créer/Mettre à jour le compte créateur
         $this->info('👑 Configuration du compte créateur...');
