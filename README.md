@@ -22,6 +22,12 @@ This repository contains a minimal Laravel application used for HR management ex
    php artisan migrate --seed
    ```
 
+The included seeders will create a demo enterprise, a creator account, an admin,
+and a sample absence record. You can run seeders separately with:
+```bash
+php artisan db:seed
+```
+
 ## Running
 Start the development server with:
 ```bash
