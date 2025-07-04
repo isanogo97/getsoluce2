@@ -19,6 +19,7 @@ class User extends Authenticatable
         'salaire_brut',
         'taux_horaire',
         'jours_ouvres',
+        'enterprise_id',
     ];
 
     protected $hidden = [
@@ -56,9 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Conge::class);
     }
+
     public function enterprise()
-{
-    return $this->belongsTo(Enterprise::class);
-}
+    {
+        return $this->belongsTo(Enterprise::class);
+    }
 
 }
