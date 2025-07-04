@@ -60,8 +60,6 @@ class Kernel extends HttpKernel
         'role.redirect' => \App\Http\Middleware\RoleRedirect::class,
         'check.role' => \App\Http\Middleware\CheckRole::class,
         'check.enterprise' => \App\Http\Middleware\CheckEnterprise::class,
-        'creator.only' => \App\Http\Middleware\CreatorOnly::class,
-        'admin.only' => \App\Http\Middleware\AdminOnly::class,
         'employee.only' => \App\Http\Middleware\EmployeeOnly::class,
         'admin.or.creator' => \App\Http\Middleware\AdminOrCreator::class,
     ];
