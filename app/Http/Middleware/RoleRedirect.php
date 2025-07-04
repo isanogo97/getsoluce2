@@ -15,6 +15,17 @@ class RoleRedirect
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (!auth()->check()) {
+            return redirect('/login');
+        }
+
+        $role = auth()->user()->role;
+
+        return match ($role) {
+            'admin' => redirect('/admin'),
+            'creator' => redirect('/creator'),
+            'employee' => redirect('/employee'),
+            default => $next($request),
+        };
     }
 }
