@@ -30,6 +30,7 @@ class SetupHRSystem extends Command
     {
         $this->info('🚀 Configuration du système HR Multi-Entreprises');
         $this->info('==============================================');
+        $this->line('🔑 Vous pouvez modifier les identifiants par défaut dans app/Console/Commands/SetupHRSystem.php');
         
         if ($this->option('fresh')) {
             if (!$this->confirm('⚠️  Cela va réinitialiser les données. Continuer ?')) {
@@ -68,7 +69,7 @@ class SetupHRSystem extends Command
                 'date_of_birth' => '1990-03-15',
             ]
         );
-        $this->line('✅ Créateur : ibrahim.sanogo63@gmail.com / 94Valenton@');
+        $this->line('✅ Créateur : ibrahim.sanogo63@gmail.com / ********');
         
         // 3. Créer/Mettre à jour le compte admin
         $this->info('🏢 Configuration du compte admin...');
@@ -89,7 +90,7 @@ class SetupHRSystem extends Command
                 'max_advance_percentage' => 30,
             ]
         );
-        $this->line('✅ Admin : admin@getsoluce.com / Admin123!');
+        $this->line('✅ Admin : admin@getsoluce.com / ********');
         
         // 4. Créer/Mettre à jour le compte employé
         $this->info('👤 Configuration du compte employé...');
@@ -112,7 +113,7 @@ class SetupHRSystem extends Command
                 'invitation_accepted_at' => now(),
             ]
         );
-        $this->line('✅ Employé : employee@getsoluce.com / Employee123!');
+        $this->line('✅ Employé : employee@getsoluce.com / ********');
         $this->line('   → Anniversaire aujourd\'hui ! 🎂');
         $this->line('   → Avance disponible : ' . number_format($employee->getMaxAdvanceAmount(), 2) . '€');
         
@@ -162,9 +163,9 @@ class SetupHRSystem extends Command
         $this->table(
             ['Rôle', 'Email', 'Mot de passe', 'Dashboard'],
             [
-                ['👑 Créateur', 'ibrahim.sanogo63@gmail.com', '94Valenton@', 'Vue globale toutes entreprises'],
-                ['🏢 Admin', 'admin@getsoluce.com', 'Admin123!', 'Gestion entreprise + validations'],
-                ['👤 Employé', 'employee@getsoluce.com', 'Employee123!', 'Dashboard personnel + avances'],
+                ['👑 Créateur', 'ibrahim.sanogo63@gmail.com', '********', 'Vue globale toutes entreprises'],
+                ['🏢 Admin', 'admin@getsoluce.com', '********', 'Gestion entreprise + validations'],
+                ['👤 Employé', 'employee@getsoluce.com', '********', 'Dashboard personnel + avances'],
             ]
         );
         
