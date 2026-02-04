@@ -64,5 +64,7 @@ class Kernel extends HttpKernel
         'admin.only' => \App\Http\Middleware\AdminOnly::class,
         'employee.only' => \App\Http\Middleware\EmployeeOnly::class,
         'admin.or.creator' => \App\Http\Middleware\AdminOrCreator::class,
+        'auth.jwt' => \App\Http\Middleware\AuthenticateJwt::class,
+        'role' => \App\Http\Middleware\EnsureRole::class,
     ];
 }
