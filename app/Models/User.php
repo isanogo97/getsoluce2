@@ -10,11 +10,15 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public const ROLE_SALARIE = 'ROLE_SALARIE';
+    public const ROLE_MANAGER = 'ROLE_MANAGER';
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'is_admin',
+        'role',
         'poste',
         'salaire_brut',
         'taux_horaire',
@@ -56,7 +60,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Conge::class);
     }
-    public function enterprise()
+
+    public function interventions()
+    {
+        return $this->hasMany(Intervention::class);
+    }
+public function enterprise()
 {
     return $this->belongsTo(Enterprise::class);
 }
