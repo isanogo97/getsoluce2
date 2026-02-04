@@ -17,10 +17,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Check for composer.json
+      id: composer-check
+      run: |
+        if [ -f composer.json ]; then
+          echo "found=true" >> $GITHUB_OUTPUT
+        else
+          echo "found=false" >> $GITHUB_OUTPUT
+        fi
+
     - name: Validate composer.json and composer.lock
+      if: steps.composer-check.outputs.found == 'true'
       run: composer validate --strict
 
     - name: Cache Composer packages
+      if: steps.composer-check.outputs.found == 'true'
       id: composer-cache
       uses: actions/cache@v3
       with:
@@ -30,6 +41,7 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
+      if: steps.composer-check.outputs.found == 'true'
       run: composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
